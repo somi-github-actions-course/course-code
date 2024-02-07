@@ -1,6 +1,24 @@
 name: Repository events
 on:
+    # events that trigger workflows
+    # https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows
     push:
+        # filter pattern cheat sheet
+        # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#filter-pattern-cheat-sheet
+        # all should be match (branches && tags && paths) to run workflow
+        branches:
+            # order is important!
+            - main
+            - "features/*" # features/testA, but not features/testA/testB
+            - "features/**" # features/testA, features/testA/testB
+            - "!develop" # you can use "!" to exclude
+        # branches-ignore: # you can't use both branches and branches-ignore, use "!" to exclude
+        #     - develop
+        tags:
+            - v1.* # v1.1, v1.1.1
+            - "!v1.1.1"
+        paths:
+            - "**.js"
     pull_request:
         types: [opened, assigned, reopened]
     issues:
