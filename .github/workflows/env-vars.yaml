@@ -4,6 +4,9 @@ on: [push]
 # Environment variables 
 # https://docs.github.com/en/actions/learn-github-actions/variables#default-environment-variables
 
+# setting env vars
+# https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#setting-an-environment-variable
+
 env:
   WF_LEVEL_ENV: Available to all jobs
 
