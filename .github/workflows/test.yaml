@@ -3,7 +3,7 @@ on: [push]
 
 jobs:
     somi-test:
-        runs-on: ubuntu-latest
+        runs-on: ubuntu:latest
         steps:
             - name: log pozdrav
               run: echo "Hello somi"
