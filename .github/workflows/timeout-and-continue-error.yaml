@@ -1,0 +1,31 @@
+name: Timeout & Continue on Error
+on: [push]
+
+jobs:
+    job-1:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Step 1
+              run: sleep 35
+              timeout-minutes: 0.5
+            - name: Step 2
+              id: step-2
+              continue-on-error: true
+              run: exit 1
+            - name: Runs on step-2 Failure
+              if: failure() && steps.step-2.conclusion == 'failure'
+              run: echo 'Step 2 has failed'
+            - name: Runs on Failure
+              if: failure()
+              run: echo 'Some step failed'
+            - name: Runs on Success
+              # This is not needed (DEFAULT BEAHAVIOUR)
+              if: success()
+              run: echo 'Runs on Success'
+            - name: Always Runs
+              # if: success() || failure()
+              if: always()
+              run: echo 'Always Runs'
+            - name: Runs When Cancelled
+              if: cancelled()
+              run: echo 'Runs on Cancelled'
