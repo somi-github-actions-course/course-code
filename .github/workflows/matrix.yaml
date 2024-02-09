@@ -32,7 +32,6 @@ jobs:
                 exclude:
                   - os: windows-latest
                     node-version: 14
-            # if any job fails, other jobs will continue
             fail-fast: true
             # max-parallel: 2
         runs-on: ${{ matrix.os }}
