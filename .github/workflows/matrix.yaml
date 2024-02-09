@@ -33,12 +33,12 @@ jobs:
                   - os: windows-latest
                     node-version: 14
             # if any job fails, other jobs will continue
-            fail-fast: true
+            # fail-fast: true
             # max-parallel: 3
         runs-on: ${{ matrix.os }}
         steps:
-            - if: matrix.experimental == true
-              run: exit 1
+            # - if: matrix.experimental == true
+            #   run: exit 1
             - run: |
                 node -v
                 echo '${{ toJson(matrix) }}'
