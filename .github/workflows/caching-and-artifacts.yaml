@@ -1,6 +1,15 @@
 name: Caching and Artifacts
 on: [workflow_dispatch]
 
+# passing data between jobs in a workflow
+# https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts#passing-data-between-jobs-in-a-workflow
+
+# upload artifacts
+# https://github.com/actions/upload-artifact
+
+# download artifacts
+# https://github.com/actions/download-artifact
+
 jobs:
   use-axios:
     runs-on: ubuntu-latest
