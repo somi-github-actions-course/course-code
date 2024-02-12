@@ -50,3 +50,9 @@ jobs:
             #   with:
             #     entrypoint: ./script2.sh
             #     args: "foo bar baz"
+            - name: Send a Teams message
+              uses: docker://torosent/teams-notify
+              env:
+                TEAMS_WEBHOOK: ${{ secrets.TEAMS_WEBHOOK }}
+                TEAMS_MESSAGE: Testing github actions
+
