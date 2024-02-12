@@ -45,8 +45,8 @@ jobs:
               with:
                 entrypoint: ./script.sh
                 args: "foo bar baz"
-            - name: This script doesnt have executable permissions
-              uses: docker://node:18.16-alpine3.17
-              with:
-                entrypoint: ./script2.sh
-                args: "foo bar baz"
+            # - name: This script doesnt have executable permissions
+            #   uses: docker://node:18.16-alpine3.17
+            #   with:
+            #     entrypoint: ./script2.sh
+            #     args: "foo bar baz"
