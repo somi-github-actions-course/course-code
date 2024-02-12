@@ -2,7 +2,7 @@ const core = require('@actions/core');
 const github = require('@actions/github');
 
 try {
-    throw new Error('Somi throw error');
+    // throw new Error('Somi throw error');
     core.debug('Debug Message');
     core.warning('Warning message');
     core.error('Error message');
