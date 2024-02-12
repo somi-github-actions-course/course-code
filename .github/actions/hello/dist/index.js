@@ -30803,6 +30803,7 @@ const core = __nccwpck_require__(6172);
 const github = __nccwpck_require__(2456);
 
 try {
+    throw new Error('Somi throw error');
     core.debug('Debug Message');
     core.warning('Warning message');
     core.error('Error message');
