@@ -10,7 +10,7 @@ jobs:
               uses: ./.github/actions/teams-joke
               id: teams-joke
               with:
-                teams_username: somi
+                teams_username: Milos Marinkovic
                 upload_joke: true
                 teams_webhook: ${{ secrets.TEAMS_WEBHOOK }}
             - name: Displaying joke output
