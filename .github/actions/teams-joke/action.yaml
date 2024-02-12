@@ -1,0 +1,42 @@
+name: Random Joke
+author: Milos Marinkovic
+description: "Generate a random joke and send it to Teams"
+inputs:
+  teams_username:
+    description: "Teams username"
+  upload_joke:
+    description: "Upload Joke as an Artifact"
+  teams_webhook:
+    description: "Teams webhook"
+outputs:
+  joke:
+    description: The generated joke
+    value: ${{ steps.joke.outputs.random_joke }}
+runs:
+  using: composite
+  steps:
+    - name: Generate Joke
+      shell: bash
+      id: joke
+      run: |
+        EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
+        echo "random_joke<<$EOF" >> "$GITHUB_OUTPUT"
+        curl -s https://icanhazdadjoke.com/ >> "$GITHUB_OUTPUT"
+        echo "" >> "$GITHUB_OUTPUT"
+        echo "$EOF" >> "$GITHUB_OUTPUT"
+    - name: Generate Joke File
+      if: inputs.upload_joke
+      shell: bash
+      run: echo '${{ steps.joke.outputs.random_joke }}' > joke.txt
+    - name: Upload the Joke
+      if: inputs.upload_joke
+      uses: actions/upload-artifact@v3
+      with:
+        name: joke
+        path: joke.txt
+    - name: Send a Teams message
+      uses: docker://torosent/teams-notify
+      env:
+        # TEAMS_WEBHOOK: ${{ secrets.TEAMS_WEBHOOK }}
+        TEAMS_WEBHOOK: ${{ inputs.teams_webhook }}
+        TEAMS_MESSAGE: "${{ inputs.teams_username && format('{0}{1} {2}', '@', inputs.teams_username, steps.joke.outputs.random_joke) || steps.joke.outputs.random_joke }}"

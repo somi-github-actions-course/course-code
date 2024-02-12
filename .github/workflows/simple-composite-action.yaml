@@ -1,0 +1,17 @@
+name: Simple Composite action
+on: [push]
+
+jobs:
+    simple-composite-action:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - name: Send a joke on Teams
+              uses: ./.github/actions/teams-joke
+              id: teams-joke
+              with:
+                teams_username: somi
+                upload_joke: true
+                teams_webhook: ${{ secrets.TEAMS_WEBHOOK }}
+            - name: Displaying joke output
+              run: echo '${{ steps.teams-joke.outputs.joke }}'
